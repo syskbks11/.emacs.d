@@ -4,7 +4,7 @@ emacs configurations
 
 # Requirements
 
-- emacs > 29.0
+- emacs >= 29.3
 
 # Checks before starting installation
 
