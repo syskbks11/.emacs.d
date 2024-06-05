@@ -6,20 +6,19 @@ emacs configurations
 
 - emacs > 29.0
 
-# Reference sites
+# Checks before starting installation
 
-- https://zenn.dev/takeokunn/articles/56010618502ccc
-
-## Checks before starting installation
+- Read references
+  - https://zenn.dev/takeokunn/articles/56010618502ccc
 
 - confirm necessary libraries installed in your machine
 ```
 ls /usr/bin/xml2-config
 ```
 
-## Installation
+# Installation
 
-### emacs
+## emacs
 
 - download emacs and compile with option `with-native-compilation=aot`
   - adjust cpu core used during compilation (8 cpus will be used with below example)
@@ -32,16 +31,22 @@ cd emacs
 
 - setup to use this emacs as default
   - choose one of two methods
-    1. write in bashrc or zshrc
 ```
-alias emacs="[DIRECTORY_OF_YOUR_EMACS]/emacs/src/emacs"
+alias emacs="[DIRECTORY_OF_YOUR_EMACS]/emacs/src/emacs" # write in bashrc or zshrc
 ```
-    2. install in system
 ```
-make install
+make install # install in system
 ```
 
-### emacs library
+## .emacs.d
+
+```
+cd
+mv .emacs.d dot.emacs.d_old # rename current .emacs.d
+git clone git@github.com:syskbks11/.emacs.d.git
+```
+
+## emacs library
 
 - when starting emacs, all libraries of emacs will be downloaded automatically
   - it takes several minutes
