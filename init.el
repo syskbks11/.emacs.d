@@ -51,6 +51,11 @@
           (expand-file-name
            (file-name-directory (or load-file-name byte-compile-current-file))))))
 
+;; Save customization blocks to a separate file.
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 ;; ;; NativeCompile setup (which needs to assign the option by yourself when compiling emacs)
 ;; (with-eval-after-load 'comp
 ;;   (setq native-comp-async-jobs-number 8)
@@ -147,7 +152,6 @@
 (leaf basic
   :doc "define basic settings in emacs"
   :custom
-  (cua-enable-cua-keys . nil)  ;; disable cua keybinds
   (tab-width           . 2)    ;; space width to be replaed from tab
   (use-short-answers   . t)    ;; use "(y or n)"
   (require-final-newline . t)  ;; add empty line at the last row
@@ -158,10 +162,9 @@
   (read-buffer-completion-ignore-case . t)    ;; buffer completion doesn't care capital/small cases
   (read-file-name-completion-ignore-case . t) ;; filename completion doesn't care capital/small cases
   :config
-  (indent-tabs-mode    nil)            ;; no indent with tab
+  (setq-default indent-tabs-mode nil)  ;; no indent with tab
   (global-display-line-numbers-mode t) ;; show line numbers on left
   (column-number-mode t)               ;; show (row,col) in mode line
-  (cua-mode t)                         ;; enable rectangle-selection
   (electric-pair-mode t)               ;; automatically write bracket pair
   (which-function-mode t)              ;; show current function name
   (prefer-coding-system 'utf-8)        ;; coding
@@ -370,8 +373,6 @@
 
 ;; python
 
-(setenv "PYTHONPATH" "/Users/shonda/.pyenv/versions/3.11.2/lib/python3.11/site-packages")
-
 (leaf company-jedi
   :ensure t
   :after company
@@ -404,17 +405,3 @@
 (provide 'init)
 
 ;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(company flycheck whitespace highlight-indent-guides electric savehist diminish blackout el-get hydra leaf-keywords leaf)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(line-number ((t (:foreground "dim grey" :background "unspecified-bg" :italic t))))
- '(line-number-current-line ((t (:foreground "#7FFFFF" :background "unspecified-bg" :italic t :bold t)))))
